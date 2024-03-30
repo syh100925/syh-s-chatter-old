@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>syh's chatter</title>
+    <link rel="shortcut icon" href="static/icon.png" type="image/x-icon">
+    <style>
+        #body {
+            background-image: url('https://imgsa.baidu.com/forum/pic/item/63395bb5c9ea15ce89ebfa8bbd003af33a87b229.jpg');
+        }
+
+        #top-bar {
+            width: 1575px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            border: 3px solid orange;
+            background-color: rgba(0, 0, 0, 0.75);
+        }
+
+        #chat {
+            width: 1575px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            border: 3px solid yellow;
+            border-radius: 5px 5px 5px 5px;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body id="body">
+    <div id="top-bar">
+        <p style="color: white; text-align: left;">-->     syh的聊天室<span style="display: block; text-align: right;"><a href="http://{{ self_ip }}/logout?username={{ username }}"><img src="static/logout.png"></img></a></span></p>
+        <p style="color: white; text-align: center; font-size: 20px;">欢迎，{{ username }}</p>
+    </div>
+
+    <br>
+
+    <div id="chat">
+        <br>
+        <br>
+
+        <img src="static/已认证.png">
+
+        <p style="color: red; text-align: left">[聊天室]: <span style="color: white;">IP chekced...... </span></p>
+
+        {% for i in range(20) %}
+            {% if users[i] == '' %}
+                <br>
+
+            {% elif users[i] == 'admin' %}
+                {% if chats[i] == 'clear' %}
+                    <p style="color: grey; text-align: center">--- 管理员清除了日志 ---</p>
+                {% endif %}
+
+            {% elif users[i] != '' %}
+                {% if chats[i][0:8] == '::file::' %}
+                    <p style="color: white; text-align: left; line-height: 4px">[{{ times[i] }}]
+                    <span style="color: {{ colors[i] }};"><</span>
+                    <span style="color: {{ colors[i] }};">{{ users[i] }}</span>
+                    <span style="color: {{ colors[i] }};">>:</span>
+                    <span style="color: white;"><a download style="background-color: white; color: black;" href="./static/uploads/{{ chats[i][8:] }}">我上传了：{{ chats[i][8:] }}</a></span></p>
+                {% else %}
+                    <p style="color: white; text-align: left; line-height: 4px">[{{ times[i] }}]
+                    <span style="color: {{ colors[i] }};"><</span>
+                    <span style="color: {{ colors[i] }};">{{ users[i] }}</span>
+                    <span style="color: {{ colors[i] }};">>: </span>
+                    <span style="color: white;">{{ chats[i] }}</span></p>
+                {% endif %}
+            {% endif %}
+
+        {% endfor %}
+
+
+        <form action="/chat-new?update={{ update }}" method="post">
+            <lable style="color: white; font-size: 25px;" for="upload_value">发言内容 --> </lable>
+            <input type="text" name="upload_value" style="color: black; font-size: 25px;" id="text_editor" value={{ text }}>
+            <br>
+            <br>
+            <input type="submit" name="" value="" style="font-size: 25px; background: url('static/upload_button.png'); width: 382px; height: 57px;">
+        </form>
+
+        <br>
+
+        <form method="POST" action="/chat_file?update={{ update }}" enctype="multipart/form-data">
+            <p style="color: white; text-align: center;"><span>
+                <lable style="color: white; font-size: 25px;" for="file">上传文件 --></label>
+                <input type="file" name="file">
+            </span></p>
+            <p style="text-align: center;"><input type="submit" value="" style="background: url('static/upload_button.png'); width: 382px; height: 57px"></p>
+        </form>
+
+        <br>
+        <br>
+
+        <script>
+            setInterval(update, 10 * 1000)
+            function update(){
+                window.location.replace("{{ jump_ip }}" + "&text=" + document.getElementById("text_editor").value)
+            }
+        </script>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,7 @@
+open('users.txt', 'w').write('admin')
+open('chats.txt', 'w').write('clear')
+open('times.txt', 'w').write('unknown')
+open('colors.txt', 'w').write('grey')
+open('login_users.txt', 'w').write('')
+open('login_passes.txt', 'w').write('')
+open('nohup.out', 'w').write('')

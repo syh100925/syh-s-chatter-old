@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>syh's chatter</title>
+    <link rel="shortcut icon" href="static/icon.png" type="image/x-icon">
+    <style>
+        #login {
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        #body {
+            background-image: url('static/background.jpg');
+        }
+        #text-input {
+            width: 1575px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+            text-align: center;
+            border: 3px solid red;
+        }
+    </style>
+</head>
+
+<body id="body">
+    <div id="login">
+        <div id="title">
+            <h1 style="color: black; font-size: 50px;">syh的聊天器</h1>
+            <p style="color: white;">一切都将逝去，只有死神永生</p>
+        </div>
+        <div id="text-input">
+            <br>
+            <br>
+            <br>
+
+            <img src="static/未认证.png">
+
+            <p style="color: white; font-size: 30px">-------------------------------------------------------------------------------------------------------------------------</p>
+
+            <p style="color: white; font-size: 30px;">请输入登录信息</p>
+            <form action="/chat" method="post">
+                <lable style="color: white; font-size: 25px;" for="username">用户名 --> </lable>
+                <input type="text" name="username" style="color: black; font-size: 25px;">
+
+                <br>
+                <br>
+
+                <lable style="color: white; font-size: 25px;" for="password">密码 --> </lable>
+                <input type="password" name="password" style="color: black; font-size: 25px;">
+
+                <p style="color: red; font-size: 15px;">{{ error }}</p>
+                <br>
+                <input type="submit" value=" " style="font-size: 25px; background: url('static/login_button.png'); width: 382px; height: 57px;">
+            </form>
+
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
+</body>
+
+</html>
